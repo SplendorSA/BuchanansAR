@@ -114,9 +114,10 @@ body {
 .close-btn {
   border: none;
   color: white ;
-  position: fixed;
+  position: absolute;
+
   top: 20px ;
-  right:10px ;
+  right:90px ;
   cursor: pointer ;
   font-size: 80px ;
   background-color: transparent;
