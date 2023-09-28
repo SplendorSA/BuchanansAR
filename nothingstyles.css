@@ -116,15 +116,17 @@ body {
   color: white ;
   position: fixed;
   top: 20px ;
-  right: 20px ;
+  right: 10px ;
   cursor: pointer ;
   font-size: 80px ;
   background-color: transparent;
 }
 
-#intro-video{
-  width: 500px;
-  height: auto;
+#video-overlay video{
+  padding-left: 20px;
+  width: 90%;
+  /* justify-content:center; */
+  /* align-self: center; */
 }
 
 @keyframes move {
