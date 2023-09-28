@@ -5,8 +5,6 @@
 
     <link rel="stylesheet" href="./nothingstyles.css">
 
-    <script src="/node_modules/aframe-effects/dist/aframe-effects.js"></script>
-    <!-- <script src="/node_modules/aframe-effects/lib/aframe.js"></script> -->
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 
 
@@ -14,26 +12,37 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
 
-    <script type="script-effect" id="customFilter" data-defaults="tDiffuse 0.3 0.3 1." data-diffuse>
-      void $main(inout vec4 c, vec4 o, vec2 uv, float d){
-          float t = time * mix(1., 1000., abs(sin(time * 10. + uv.x)));
-          uv = vec2(uv.x + resolution.z * sin(t * c.r + c.b), uv.y - resolution.w * cos(t * c.b + c.r));
-          c.rgb += smoothstep(0.3, 0.9, texture2D($0,uv).rgb  ) * mix( $1, $2, abs(sin(time * $3))) ;
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var popupVideo = document.getElementById("video-overlay");
+        var popupVideoContent = document.querySelector(".popupVideo-content");
+        var closeBtn = document.getElementById("close-btn");
+
+        // Agrega un controlador de eventos para cerrar el pop-up al hacer clic en el botón de cerrar
+        closeBtn.addEventListener("click", function() {
+          popupVideo.style.display = "none";
+        });
+
+        // Agrega un controlador de eventos para cerrar el pop-up al hacer clic fuera de la imagen
+        window.addEventListener("click", function(event) {
+          if (event.target === popupVideo) {
+            popupVideo.style.display = "none";
+          }
+        });
+
+        // Evita que los clics dentro del contenido del popupVideo cierren el popupVideo
+        popupVideoContent.addEventListener("click", function(event) {
+          event.stopPropagation();
+        });
+      });
+
+      function showExampleContainer() {
+        // Oculta el video
+        const autoCloseVideo = document.getElementById("video-overlay");
+        autoCloseVideo.style.display = "none";
       }
-    </script>
 
-    <script type="script-effect" id="blendOutline" data-diffuse>
-        void $main(inout vec4 c, vec4 o, vec2 uv, float d){
-            c.rgb = mix(c.rgb, o.rgb, smoothstep(0.1,0.3,o.a));
-        }
     </script>
-
-    <script type="script-effect" id="add" data-defaults="bloom_texture bloom_intensity" data-diffuse>
-        void $main(inout vec4 c, vec4 o, vec2 uv, float d){
-            c.rgb += pow(texture2D($0, uv).rgb,vec3(2.)) * $1;
-        }
-    </script>
-
 
     <script>
 
@@ -228,29 +237,45 @@
 
   </head>
   <body>
-    <div class="example-container">
+
+
+    <div id="video-overlay">
       
-      <div id="example-scanning-overlay" class="hidden">
-	      <div class="inner">
+      <button id="close-btn" class="close-btn">&times;</button>
 
+      <div class="inner-vid">
 
-          <img src="./img/ImgPreviewTargetRedim.jpeg"/>
-          <div class="scanline"></div>
-
-        </div>
+        <video id="intro-video" autoplay muted playsinline onended="showExampleContainer()">
+          <source src="./vid/PromoBuchanans.mp4" type="video/mp4">
+          Tu navegador no admite la reproducción de videos.
+        </video>
+        
       </div>
 
+    </div>
+
+    <div class="example-container">
+      
+      <!-- ScanLine: aparece cuando el target no está siendo enfocado-->
+      <div id="example-scanning-overlay" class="hidden">
+
+	      <div class="inner">
+
+          <div class="scanline"></div>
+	        <img src="./img/ImgPreviewTargetRedim.jpeg" style="height: 400px; width: 400px;"/>
+          
+	      </div>
+
+      </div>
+
+
       <a-scene
-        mindar-image="imageTargetSrc: ./assets/BuchanansMateriales/TargetWhisky.mind;"
-        embedded
-        renderer="colorManagement: true physicallyCorrectLights: true;"
-        vr-mode-ui="enabled: false"
-        device-orientation-permission-ui="enabled: false"
-        stats
-        antialias="false"
-        effects=" bloom, fxaa"
-        bloom="filter: bloom!, bloom.filter, #customFilter(bloom_texture 0.3 0.6 0.5); strength: 0.8; radius:6.5"
-        fxaa="false"
+      mindar-image="imageTargetSrc: ./assets/BuchanansMateriales/TargetWhisky.mind; showStats: false; uiScanning: #example-scanning-overlay;"
+      embedded
+      renderer="colorManagement: true physicallyCorrectLights: true;"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+      stats
       >
 
 
@@ -293,7 +318,11 @@
         </a-assets>
 
 
-        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
+        <a-camera
+        position="0 0 0"
+        look-controls="enabled: false" 
+        cursor="fuse: false; rayOrigin: mouse;" 
+        raycaster="far: 10000; objects: .clickable">
         </a-camera>
 
 
@@ -301,96 +330,96 @@
         <!-- Target con sus objetos internos -->
         <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
 
+            <!-- Plano con imagen detrás (Se puede quitar) -->
+            <!-- <a-plane src="#card" position="0 0 -.5" height="2" width="1.5" rotation="0 0 0"></a-plane> -->
 
+            <!-- Panel con imagenes + video -->
+            <a-entity visible=false id="promo-panel" position="0 0 0">
 
+              <!-- Texto en la parte superior -->
+              <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
 
+              <!-- Video + Preview Image del video -->
+              <a-entity id="promo-item0">
+                <a-video id="paintandquest-video-link" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
+                <a-image id="IMG-Preview-button" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                </a-image>
+              </a-entity>
 
-          <!-- Plano con imagen detrás (Se puede quitar) -->
-          <!-- <a-plane src="#card" position="0 0 -.5" height="2" width="1.5" rotation="0 0 0"></a-plane> -->
+              <!-- Imagen 2 -->
+              <a-entity id="promo-item1" visible=false>
+                <a-image class="clickable" src="#IMG2" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                </a-image>
+              </a-entity>
 
-          <!-- Panel con imagenes + video -->
-          <a-entity visible=false id="promo-panel" position="0 0 0">
+              <!-- Imagen 3 -->
+              <a-entity id="promo-item2" visible=false>
+                <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                </a-image>
+              </a-entity>
 
-            <!-- Texto en la parte superior -->
-            <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
-
-            <!-- Video + Preview Image del video -->
-            <a-entity id="promo-item0">
-              <a-video id="paintandquest-video-link" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
-              <a-image id="IMG-Preview-button" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="0 0 0" height="1" width="1">
-              </a-image>
+              <!-- Posición de flechas cambia IMGs -->
+              <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
+              <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
             </a-entity>
 
-            <!-- Imagen 2 -->
-            <a-entity id="promo-item1" visible=false>
-              <a-image class="clickable" src="#IMG2" alpha-test="0.5" position="0 0 0" height="1" width="1">
-              </a-image>
+            <!-- Posición Web Icon -->
+            <a-image visible=false id="web-button" class="clickable" src="#icon-web" alpha-test="0.5" position="-0.42 -0.8 1" height="0.15" width="0.15"
+            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+            ></a-image>
+
+            <!-- Posición Instagram Icon -->
+            <a-image visible=false id="instagram-button" class="clickable" src="#icon-instagram" position="-0.14 -0.8 1" height="0.15" width="0.15"
+            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+            ></a-image>
+
+            <!-- Posición Facebook Icon -->
+            <a-image visible=false id="facebook-button" class="clickable" src="#icon-facebook"  position="0.14 -0.8 1" height="0.15" width="0.15"
+            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+            ></a-image>
+
+            <!-- Posición Youtube Icon -->
+            <a-image visible=false id="youtube-button" class="clickable" src="#icon-youtube" position="0.42 -.8 1" height="0.15" width="0.15"
+            animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+            ></a-image>
+
+
+
+            <!-- Posición Objeto 3D -->
+          
+            <a-entity
+            id="avatar"
+            gltf-model="#avatarModel"
+            rotation="90 0 0"
+            scale="1 1 1">
             </a-entity>
 
-            <!-- Imagen 3 -->
-            <a-entity id="promo-item2" visible=false>
-              <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
-              </a-image>
-            </a-entity>
+            <!-- Iluminación Botella -->
+            
+            <a-light type="directional" intensity="0"></a-light>
 
-            <!-- Posición de flechas cambia IMGs -->
-            <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
-            <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
-          </a-entity>
+            <a-light type="spot" target="#avatar" position="5 5 0" distance="0" penumbra="1" angle="10" intensity="2" color="#6cc3bf"></a-light>
+            <a-light type="spot" target="#avatar" position="-5 5 0" distance="0" penumbra="1" angle="10" intensity="2" color="#e62d3d"></a-light>
 
-          <!-- Posición Web Icon -->
-          <a-image visible=false id="web-button" class="clickable" src="#icon-web" alpha-test="0.5" position="-0.42 -0.8 1" height="0.15" width="0.15"
-          animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-          ></a-image>
+            <a-light type="spot" target="#avatar" position="0 0 5" distance="0" penumbra="1" angle="8" intensity=".8" color="white"></a-light>
+            <a-light type="spot" target="#avatar" position="0 -5 -5" distance="0" penumbra="1" angle="3" intensity=".5" color="#0000ff"></a-light>
 
-          <!-- Posición Instagram Icon -->
-          <a-image visible=false id="instagram-button" class="clickable" src="#icon-instagram" position="-0.14 -0.8 1" height="0.15" width="0.15"
-          animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-          ></a-image>
+            <a-light type="spot" target="#avatar" position="0 5 5" distance="0" penumbra="1" angle="4" intensity=".1" color="white"></a-light>
+            <a-light type="spot" target="#avatar" position="0 5 -5" distance="0" penumbra="1" angle="4" intensity=".1" color="white"></a-light>
+            
+            <a-light type="spot" target="#avatar" position="0 -1 -5" distance="0" penumbra="1" angle="4" intensity="5" color="#ffffdd"></a-light>
 
-          <!-- Posición Facebook Icon -->
-          <a-image visible=false id="facebook-button" class="clickable" src="#icon-facebook"  position="0.14 -0.8 1" height="0.15" width="0.15"
-          animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-          ></a-image>
-
-          <!-- Posición Youtube Icon -->
-          <a-image visible=false id="youtube-button" class="clickable" src="#icon-youtube" position="0.42 -.8 1" height="0.15" width="0.15"
-          animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
-          ></a-image>
-
-
-
-          <!-- Posición Objeto 3D -->
-         
-          <a-entity
-          id="avatar"
-          gltf-model="#avatarModel"
-          rotation="90 0 0"
-          scale="1 1 1">
-          </a-entity>
-
-          <!-- Iluminación Botella -->
-          
-          <a-light type="spot" target="#avatar" position="5 5 0" distance="0" penumbra="1" angle="10" intensity="2" color="#6cc3bf"></a-light>
-          <a-light type="spot" target="#avatar" position="-5 5 0" distance="0" penumbra="1" angle="10" intensity="2" color="#e62d3d"></a-light>
-
-          <a-light type="spot" target="#avatar" position="0 0 5" distance="0" penumbra="1" angle="8" intensity=".8" color="white"></a-light>
-          <a-light type="spot" target="#avatar" position="0 -5 -5" distance="0" penumbra="1" angle="3" intensity=".5" color="#0000ff"></a-light>
-
-          <a-light type="spot" target="#avatar" position="0 5 5" distance="0" penumbra="1" angle="4" intensity=".1" color="white"></a-light>
-          <a-light type="spot" target="#avatar" position="0 5 -5" distance="0" penumbra="1" angle="4" intensity=".1" color="white"></a-light>
-          
-          <a-light type="spot" target="#avatar" position="0 -1 -5" distance="0" penumbra="1" angle="4" intensity="5" color="#ffffdd"></a-light>
-
-          
-
-
-         
         </a-entity>
 
 
       </a-scene>
 
+
+
     </div>
+    
+    
+
+
   </body>
 </html>
