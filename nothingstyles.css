@@ -116,13 +116,13 @@ body {
   color: white ;
   position: fixed;
   top: 20px ;
-  right: 10px ;
+  right:90px ;
   cursor: pointer ;
   font-size: 80px ;
   background-color: transparent;
 }
 
-#video-overlay video{
+#intro-video{
   padding-left: 20px;
   width: 90%;
   /* justify-content:center; */
