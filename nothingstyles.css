@@ -117,7 +117,7 @@ body {
   position: absolute;
 
   top: 20px ;
-  right:10px ;
+  right: -20px ;
   cursor: pointer ;
   font-size: 80px ;
   background-color: transparent;
