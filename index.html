@@ -104,15 +104,25 @@
       // Función de creación
       const showPromo = (done) => {
         const promo = document.querySelector("#promo-panel");
+        const promo2 = document.querySelector("#promo-panel2");
+        const promo3 = document.querySelector("#promo-panel3");
+
         const promoLeftButton = document.querySelector("#promo-left-button");
         const promoRightButton = document.querySelector("#promo-right-button");
+
         const paintandquestPreviewButton = document.querySelector("#IMG-Preview-button");
+        const paintandquestPreviewButton2 = document.querySelector("#IMG-Preview-button2");
+        const paintandquestPreviewButton3 = document.querySelector("#IMG-Preview-button3");
+
 
         let y = 0;
         let currentItem = 0;
 
-        // Texto que está sobre la promo
+        // Visibilidad del panel
         promo.setAttribute("visible", true);
+        promo2.setAttribute("visible", true);
+        promo3.setAttribute("visible", true);
+
 
         // Mustra la Promo con las imagenes en la parte superior
         const showPromoItem = (item) => {
@@ -155,12 +165,44 @@
               }
             });
 
+            paintandquestPreviewButton2.addEventListener('click', () => {
+              paintandquestPreviewButton2.setAttribute("visible", false);
+              const testVideo = document.createElement( "video" );
+              const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
+              if (canplayWebm == "") {
+                document.querySelector("#paintandquest-video-link2").setAttribute("visible", true);
+                document.querySelector("#paintandquest-video-link2").setAttribute("src", "#videoPromoMp4");
+                document.querySelector("#videoPromoMp4").play();
+              } else {
+                document.querySelector("#paintandquest-video-link2").setAttribute("visible", true);
+                document.querySelector("#paintandquest-video-link2").setAttribute("src", "#videoPromoWebM");
+                document.querySelector("#videoPromoWebM").play();
+              }
+            });
+
+            paintandquestPreviewButton3.addEventListener('click', () => {
+              paintandquestPreviewButton3.setAttribute("visible", false);
+              const testVideo = document.createElement( "video" );
+              const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
+              if (canplayWebm == "") {
+                document.querySelector("#paintandquest-video-link3").setAttribute("visible", true);
+                document.querySelector("#paintandquest-video-link3").setAttribute("src", "#videoPromoMp4");
+                document.querySelector("#videoPromoMp4").play();
+              } else {
+                document.querySelector("#paintandquest-video-link3").setAttribute("visible", true);
+                document.querySelector("#paintandquest-video-link3").setAttribute("src", "#videoPromoWebM");
+                document.querySelector("#videoPromoWebM").play();
+              }
+            });
+
             setTimeout(() => {
               done();
             }, 500);
 
           }
           promo.setAttribute("position", "0 " + y + " -0.01");
+          promo2.setAttribute("position", ".915 " + y + " .255");
+          promo3.setAttribute("position", "-.915 " + y + " .255");
         }, 10);
       }
 
@@ -345,6 +387,64 @@
               <a-entity id="promo-item0">
                 <a-video id="paintandquest-video-link" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
                 <a-image id="IMG-Preview-button" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                </a-image>
+              </a-entity>
+
+              <!-- Imagen 2 -->
+              <a-entity id="promo-item1" visible=false>
+                <a-image class="clickable" src="#IMG2" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                </a-image>
+              </a-entity>
+
+              <!-- Imagen 3 -->
+              <a-entity id="promo-item2" visible=false>
+                <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                </a-image>
+              </a-entity>
+
+              <!-- Posición de flechas cambia IMGs -->
+              <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
+              <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
+            </a-entity>
+
+            <a-entity visible=false id="promo-panel2" position=".915 .6 .255" rotation="0 -33 0">
+
+              <!-- Texto en la parte superior -->
+              <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
+
+              <!-- Video + Preview Image del video -->
+              <a-entity id="promo-item0">
+                <a-video id="paintandquest-video-link2" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
+                <a-image id="IMG-Preview-button2" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                </a-image>
+              </a-entity>
+
+              <!-- Imagen 2 -->
+              <a-entity id="promo-item1" visible=false>
+                <a-image class="clickable" src="#IMG2" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                </a-image>
+              </a-entity>
+
+              <!-- Imagen 3 -->
+              <a-entity id="promo-item2" visible=false>
+                <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                </a-image>
+              </a-entity>
+
+              <!-- Posición de flechas cambia IMGs -->
+              <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
+              <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
+            </a-entity>
+
+            <a-entity visible=false id="promo-panel3" position="-.915 .6 .255" rotation="0 33 0">
+
+              <!-- Texto en la parte superior -->
+              <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
+
+              <!-- Video + Preview Image del video -->
+              <a-entity id="promo-item0">
+                <a-video id="paintandquest-video-link3" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
+                <a-image id="IMG-Preview-button3" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="0 0 0" height="1" width="1">
                 </a-image>
               </a-entity>
 
