@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
 
     <script>
+
       document.addEventListener("DOMContentLoaded", function() {
         var popupVideo = document.getElementById("video-overlay");
         var popupVideoContent = document.querySelector(".popupVideo-content");
@@ -274,6 +275,9 @@
 
 
       });
+
+       document.querySelector('a-scene').renderer.setTexture2D(ourTexture, 0);
+
 
     </script>
 
