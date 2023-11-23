@@ -56,6 +56,9 @@
         const instagramButton = document.querySelector("#instagram-button");
         const facebookButton = document.querySelector("#facebook-button");
         const youtubeButton = document.querySelector("#youtube-button");
+        const registroButton = document.querySelector("#registro-button");
+        const redirYouButton = document.querySelector("#IMG-Preview-button");
+
         // const text = document.querySelector("#text");
 
         // Tiempo en el que aprecerán los botones luego de que el primero aparezca
@@ -69,6 +72,9 @@
         setTimeout(() => {
           youtubeButton.setAttribute("visible", true);
         }, 900);
+        setTimeout(() => {
+          registroButton.setAttribute("visible", true);
+        }, 1200);
 
         // Eventos de los botones (Cuando son clickeados)
         let currentTab = '';
@@ -92,7 +98,16 @@
           window.open("https://www.youtube.com/@BuchanansColombia");
           currentTab = 'youtube';
         });
-
+        registroButton.addEventListener('click', function (evt) {
+          console.log("Registro");
+          window.open("https://co.buchananswhisky.com");
+          currentTab = 'registro';
+        });
+        redirYouButton.addEventListener('click', function (evt) {
+          console.log("Registro");
+          window.open("https://www.youtube.com/watch?v=ljXvW9GJKd0");
+          currentTab = 'registro';
+        });
         // text.addEventListener('click', function (evt) {
         //   if (currentTab === 'web') {
         //     console.log("Web2");
@@ -111,7 +126,7 @@
         const promoLeftButton = document.querySelector("#promo-left-button");
         const promoRightButton = document.querySelector("#promo-right-button");
 
-        const paintandquestPreviewButton = document.querySelector("#IMG-Preview-button");
+        // const paintandquestPreviewButton = document.querySelector("#IMG-Preview-button");
         const paintandquestPreviewButton2 = document.querySelector("#IMG-Preview-button2");
         const paintandquestPreviewButton3 = document.querySelector("#IMG-Preview-button3");
 
@@ -151,20 +166,20 @@
             });
 
             // Permite reproducir el video
-            paintandquestPreviewButton.addEventListener('click', () => {
-              paintandquestPreviewButton.setAttribute("visible", false);
-              const testVideo = document.createElement( "video" );
-              const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
-              if (canplayWebm == "") {
-                document.querySelector("#paintandquest-video-link").setAttribute("visible", true);
-                document.querySelector("#paintandquest-video-link").setAttribute("src", "#videoPromoMp4");
-                document.querySelector("#videoPromoMp4").play();
-              } else {
-                document.querySelector("#paintandquest-video-link").setAttribute("visible", true);
-                document.querySelector("#paintandquest-video-link").setAttribute("src", "#videoPromoWebM");
-                document.querySelector("#videoPromoWebM").play();
-              }
-            });
+            // paintandquestPreviewButton.addEventListener('click', () => {
+            //   paintandquestPreviewButton.setAttribute("visible", false);
+            //   const testVideo = document.createElement( "video" );
+            //   const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
+            //   if (canplayWebm == "") {
+            //     document.querySelector("#paintandquest-video-link").setAttribute("visible", true);
+            //     document.querySelector("#paintandquest-video-link").setAttribute("src", "#videoPromoMp4");
+            //     document.querySelector("#videoPromoMp4").play();
+            //   } else {
+            //     document.querySelector("#paintandquest-video-link").setAttribute("visible", true);
+            //     document.querySelector("#paintandquest-video-link").setAttribute("src", "#videoPromoWebM");
+            //     document.querySelector("#videoPromoWebM").play();
+            //   }
+            // });
 
             paintandquestPreviewButton2.addEventListener('click', () => {
               paintandquestPreviewButton2.setAttribute("visible", false);
@@ -342,12 +357,18 @@
           <!--  Icono Youtube-->
           <img id="icon-youtube" src="./img/Yotube.png" />
 
+          <!-- Icono Registro -->
+          <img id="icon-registro" src="./img/Registro.png" />
+
+
           <!-- Botones Izq y Der para cambiar imagenes en la Promo -->
           <img id="icon-left" src="./img/Izq.png" />
           <img id="icon-right" src="./img/Der.png" />
 
           <!-- Imagen inicial antes del video -->
-          <img id="IMG-Preview" src="./img/PreviewVid.jpg" />
+          <img id="IMG-Preview" src="./img/IMGPanel.png" />
+          <img id="IMG-Preview3" src="./img/PreviewVid.jpg" />
+          <img id="IMG-Preview2" src="./img/PromoIMG2.jpg" />
 
           <!-- Video -->
           <video id="videoPromoMp4" autoplay="false" loop="true" src="./vid/PromoBuchanans.mp4"></video>
@@ -381,7 +402,7 @@
             <!-- Plano con imagen detrás (Se puede quitar) -->
             <!-- <a-plane src="#card" position="0 0 -.5" height="2" width="1.5" rotation="0 0 0"></a-plane> -->
 
-            <a-entity position="0 -2 0" scale="5 5 5">
+            <a-entity position="0 -2 0" scale="4 4 4">
             <!-- Panel con imagenes + video -->
               <a-entity visible=false id="promo-panel"  position="0 0 0">
 
@@ -390,20 +411,8 @@
 
               <!-- Video + Preview Image del video -->
               <a-entity id="promo-item0">
-                <a-video id="paintandquest-video-link" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
-                <a-image id="IMG-Preview-button" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                </a-image>
-              </a-entity>
-
-              <!-- Imagen 2 -->
-              <a-entity id="promo-item1" visible=false>
-                <a-image class="clickable" src="#IMG2" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                </a-image>
-              </a-entity>
-
-              <!-- Imagen 3 -->
-              <a-entity id="promo-item2" visible=false>
-                <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                <!-- <a-video id="paintandquest-video-link" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video> -->
+                <a-image id="IMG-Preview-button" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="-.001 0 0" height="1.5" width="1">
                 </a-image>
               </a-entity>
 
@@ -420,7 +429,7 @@
               <!-- Video + Preview Image del video -->
               <a-entity id="promo-item0">
                 <a-video id="paintandquest-video-link2" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
-                <a-image id="IMG-Preview-button2" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                <a-image id="IMG-Preview-button2" class="clickable" src="#IMG-Preview2" alpha-test="0.5" position="0 0 0" height="1" width="1">
                 </a-image>
               </a-entity>
 
@@ -449,7 +458,7 @@
               <!-- Video + Preview Image del video -->
               <a-entity id="promo-item0">
                 <a-video id="paintandquest-video-link3" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
-                <a-image id="IMG-Preview-button3" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                <a-image id="IMG-Preview-button3" class="clickable" src="#IMG-Preview3" alpha-test="0.5" position="0 0 0" height="1" width="1">
                 </a-image>
               </a-entity>
 
@@ -485,11 +494,15 @@
               animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
               </a-image>
 
-             <!-- Posición Youtube Icon -->
+              <!-- Posición Youtube Icon -->
               <a-image visible=false id="youtube-button" class="clickable" src="#icon-youtube" position="0.42 -.5 .5" height="0.15" width="0.15"
               animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
               </a-image>
 
+              <!-- Posición Youtube Icon -->
+              <a-image visible=false id="registro-button" class="clickable" src="#icon-registro" position="0 -.6 1" height="0.15" width="0.40"
+              animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+              </a-image>
 
 
               <!-- Posición Objeto 3D -->
