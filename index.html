@@ -5,8 +5,6 @@
       <meta charset="UTF-8" />
       <title>Splendor Publicidad - Retail Image</title>
       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, shrink-to-fit=no" />
-      <!-- <meta name="description" content="Diseño, Innovación y Experiencia de Usuario que Potencian tu Marca, con Amplia Experiencia en el Retail, Mobiliario, Visibilidad y Shopper Experience." /> -->
-      <!-- <meta name="keywords" content="Diseño, Innovación, Experiencia de Usuario, Engagement, Branding, Retail, Mobiliario, Shopper, Visibilidad, Experiencia de Compra" /> -->
       <meta name="author" content="MtrQ - Desarrollador Digital de Splendor Publicidad S.A." />
       <meta name="website" content="https://www.splendorpublicidad.com" />
       <meta name="email" content="comercial@splendorpublicidad.com" />
@@ -17,16 +15,15 @@
       <link rel="shortcut icon" href="assets/images/favicon.ico" />
       <link rel="apple-touch-icon" href="assets/images/favicon.ico" />
 
-      <link rel="stylesheet" href="./nothingstyles.css">
-
+      
       <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
       <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
-
+      
       <!-- JS para AR -->
-
+      
         <!-- JS para Pop-Up -->
-        <script>
+          <script>
 
           document.addEventListener("DOMContentLoaded", function() {
             var popupVideo = document.getElementById("video-overlay");
@@ -57,11 +54,11 @@
             autoCloseVideo.style.display = "none";
           }
     
-        </script>
+          </script>
         <!-- Fin Pop-Up -->
-  
+        
         <!-- JS para Botones -->
-        <script>
+          <script>
     
           // Función de creación, aparición y eventos de los botones
           const showInfo = () => {
@@ -167,35 +164,7 @@
             const id = setInterval(() => {
               y += 0.008;
               if (y >= 0.6) {
-    
-                // Evento para que los botones izq y der funcionen
-                // clearInterval(id);
-                // promoLeftButton.setAttribute("visible", true);
-                // promoRightButton.setAttribute("visible", true);
-                // promoLeftButton.addEventListener('click', () => {
-                //   currentItem = (currentItem + 1) % 3;
-                //   showPromoItem(currentItem);
-                // });
-                // promoRightButton.addEventListener('click', () => {
-                //   currentItem = (currentItem - 1 + 3) % 3;
-                //   showPromoItem(currentItem);
-                // });
-    
-                // Permite reproducir el video
-                // paintandquestPreviewButton.addEventListener('click', () => {
-                //   paintandquestPreviewButton.setAttribute("visible", false);
-                //   const testVideo = document.createElement( "video" );
-                //   const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
-                //   if (canplayWebm == "") {
-                //     document.querySelector("#paintandquest-video-link").setAttribute("visible", true);
-                //     document.querySelector("#paintandquest-video-link").setAttribute("src", "#videoPromoMp4");
-                //     document.querySelector("#videoPromoMp4").play();
-                //   } else {
-                //     document.querySelector("#paintandquest-video-link").setAttribute("visible", true);
-                //     document.querySelector("#paintandquest-video-link").setAttribute("src", "#videoPromoWebM");
-                //     document.querySelector("#videoPromoWebM").play();
-                //   }
-                // });
+
     
                 paintandquestPreviewButton2.addEventListener('click', () => {
                   paintandquestPreviewButton2.setAttribute("visible", false);
@@ -234,26 +203,14 @@
                 y=0.6;
               }
               
+              
               promo.setAttribute("position", "0 " + y + " -0.01");
               promo2.setAttribute("position", ".915 " + y + " .255");
               promo3.setAttribute("position", "-.915 " + y + " .255");
             }, 10);
           }
     
-          // Animación Objeto 3d por medio de JS
-          // const showAvatar = (onDone) => {
-          //   const avatar = document.querySelector("#avatar");
-          //   let z = -0.3;
-          //   const id = setInterval(() => {
-          //     z += 0.008;
-          //     if (z >= 0.3) {
-          //       clearInterval(id);
-          //       onDone();
-          //     }
-          //     avatar.setAttribute("position", "0 -0.25 " + z);
-          //   }, 10);
-          // }
-    
+          var botella = document.querySelector('#avatar');
           //Eventos al registrar el Target
           AFRAME.registerComponent('mytarget', {
     
@@ -266,32 +223,31 @@
                 // Avisa en la consola que el Target fue encontrado
                 console.log("Target Found");
 
-                // Se pone un TimeOut de 5000 milisegundos para que empiece con la siguiente función
+
+                document.querySelector("#avatar").setAttribute("animation-mixer", "loop:once; clampWhenFinished: true;");
+
+
+                // Se pone un TimeOut de 500 milisegundos para que empiece con la siguiente función
                 setTimeout(() => {
   
                   // Al cumplirse los 300 milisegundos anteriores empieza la función showPromo que se encuentra en la línea 69
-                  showPromo(() => {
+                  // showPromo(() => {
+                  //   // Al igual que lo anterior se pone un TimeOut de 300 milisegundos para que empiece la siguiente función
+                  //   setTimeout(() => {
+                  //     // Empieza la función showInfo que se encuentra en la línea 14
+                  //     showInfo();
+                  //   }, 300);
+                  // });
+                  showPromo();
+                  showInfo();
+                  
   
-                    // Al igual que lo anterior se pone un TimeOut de 300 milisegundos para que empiece la siguiente función
-                    setTimeout(() => {
-  
-                      // Empieza la función showInfo que se encuentra en la línea 14
-                      showInfo();
-  
-                    }, 300);
-  
-                  });
-  
-                }, 5000);
-    
-                document.querySelector("#avatar").setAttribute("animation-mixer", "clip:LiquidoPadre; autoplay:true; loop:once; clampWhenFinished: true;")
-                
+                }, 1000);
     
               });
     
               // Hace la lectura de la señal de que el Target se perdió
               this.el.addEventListener('targetLost', event => {
-    
     
                 //Avisa en la consola que el Target se perdió
                 console.log("Target Lost");
@@ -307,33 +263,34 @@
     
           });
     
-        </script>
+          </script>
         <!-- Fin Botones -->
 
       <!-- Fin JS para AR -->
-
-      <!-- Css -->
-      <link href="assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet">
-
-      <!-- Main Css -->
-      <link href="assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
-      <link rel="stylesheet" href="assets/css/icons.css" />
-      <link rel="stylesheet" href="assets/css/tailwind.css" />
-
-    </head>
-    
-    <body>
         
-      <div id="video-overlay">
-      
-      
-        <div class="inner-vid">
+        <!-- Css -->
+        <link rel="stylesheet" href="./nothingstyles.css">
+        <link href="assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet">
+        
+        <!-- Main Css -->
+        <link href="assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" href="assets/css/icons.css" />
+        <link rel="stylesheet" href="assets/css/tailwind.css" />
+        
+      </head>
+    
+      <body>
+        
+        <div id="video-overlay">
           
-          <button id="close-btn" class="close-btn">&times;</button>
-          <video id="intro-video" autoplay muted playsinline onended="showExampleContainer()">
-            <source src="./vid/PromoBuchanans.mp4" type="video/mp4">
-            Tu navegador no admite la reproducción de videos.
-          </video>
+          
+          <div class="inner-vid">
+            
+            <button id="close-btn" class="close-btn">&times;</button>
+            <video id="intro-video" autoplay muted playsinline onended="showExampleContainer()">
+              <source src="./vid/PromoBuchanans.mp4" type="video/mp4">
+              Tu navegador no admite la reproducción de videos.
+            </video>
           
         </div>
   
@@ -358,13 +315,14 @@
         mindar-image="imageTargetSrc: ./assets/BuchanansMateriales/ART.mind;
         showStats: false;
         uiScanning: #example-scanning-overlay;
-        filterMinCF: 0.0002; 
+        filterMinCF: 0.0001; 
         filterBeta: 0.001;"
         embedded 
         renderer="colorManagement: true; physicallyCorrectLights: true; logarithmicDepthBuffer: true; precision: high;"
         vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false"
-        stats = "false"
+        stats = "true"
+        light="defaultLightsEnabled: false" 
         >
   
         
@@ -409,7 +367,9 @@
             <img id="IMG3" src="./img/PromoImg3.jpg" />
   
             <!-- Modelado 3D -->
-            <a-asset-item id="avatarModel" src="./assets/BuchanansMateriales/BotellaUltraLight.glb"></a-asset-item>
+            <a-asset-item id="avatarModel" src="./assets/BuchanansMateriales/BotellaUltraLightV2.glb"></a-asset-item>
+            <a-asset-item id="Liquid" src="./assets/BuchanansMateriales/LiquidoExp.glb"></a-asset-item>
+            
             <!-- <a-asset-item id="avatarModel" src="./assets/BuchanansMateriales/Prueba iluminacion.glb"></a-asset-item> -->
           </a-assets>
   
@@ -544,11 +504,22 @@
                 rotation="90 0 0"
                 scale=".7 .7 .7"
                 position="0 -0.2 .2"
-                
                 >
                 </a-entity>
-  
+
+                <a-entity
+                id="liquido"
+                gltf-model="#Liquid"
+                rotation="90 0 0"
+                scale=".7 .7 .7"
+                position="-.3 -0.5 .2"
+                animation-mixer="clip:; loop: true;"
+                >
                 </a-entity>
+                
+                <a-entity light="type: ambient; color: #fff"></a-entity>
+
+              </a-entity>
   
           </a-entity>
           
