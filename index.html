@@ -224,25 +224,21 @@
                 console.log("Target Found");
 
 
-                document.querySelector("#avatar").setAttribute("animation-mixer", "loop:once; clampWhenFinished: true;");
-
-
+                
+                
                 // Se pone un TimeOut de 500 milisegundos para que empiece con la siguiente función
                 setTimeout(() => {
-  
-                  // Al cumplirse los 300 milisegundos anteriores empieza la función showPromo que se encuentra en la línea 69
-                  // showPromo(() => {
-                  //   // Al igual que lo anterior se pone un TimeOut de 300 milisegundos para que empiece la siguiente función
-                  //   setTimeout(() => {
-                  //     // Empieza la función showInfo que se encuentra en la línea 14
-                  //     showInfo();
-                  //   }, 300);
-                  // });
-                  showPromo();
-                  showInfo();
+                 
+                  document.querySelector("#avatar").setAttribute("animation-mixer", "loop:once; clampWhenFinished: true;");
                   
+                  setTimeout(() => {
+                    
+                    showPromo();
+                    showInfo();
+                    
+                  },10000);
   
-                }, 1000);
+                }, 3000);
     
               });
     
@@ -256,8 +252,8 @@
     
               const videoVolMp4 = document.querySelector("#videoPromoMp4");
               const videoVolWebM = document.querySelector("#videoPromoWebM");
-              videoVolMp4.volume = 0.3;
-              videoVolWebM.volume = 0.3;
+              videoVolMp4.volume = 0.2;
+              videoVolWebM.volume = 0.2;
             }
     
     
@@ -321,8 +317,7 @@
         renderer="colorManagement: true; physicallyCorrectLights: true; logarithmicDepthBuffer: true; precision: high;"
         vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: false"
-        stats = "true"
-        light="defaultLightsEnabled: false" 
+        stats = "false"
         >
   
         
