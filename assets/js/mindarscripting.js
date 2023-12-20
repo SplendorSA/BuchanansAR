@@ -76,9 +76,10 @@ const showInfo = () => {
 
     // Hace visible los botones
     const id = setInterval(() => {
+      
       y += 0.008;
-      if (y >= 0.6) {
 
+      if (y >= 0.6) {
 
         paintandquestPreviewButton2.addEventListener('click', () => {
           paintandquestPreviewButton2.setAttribute("visible", false);
@@ -109,16 +110,15 @@ const showInfo = () => {
             document.querySelector("#videoPromoWebM").play();
           }
         });
-
-        
         
         y=0.6;
+
       }
-      
       
       promo.setAttribute("position", "0 " + y + " -0.01");
       promo2.setAttribute("position", ".915 " + y + " .255");
       promo3.setAttribute("position", "-.915 " + y + " .255");
+
     }, 10);
   }
 
@@ -135,9 +135,6 @@ const showInfo = () => {
         // Avisa en la consola que el Target fue encontrado
         console.log("Target Found");
 
-
-        
-        
         // Se pone un TimeOut de 500 milisegundos para que empiece con la siguiente función
         setTimeout(() => {
          
