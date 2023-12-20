@@ -39,6 +39,25 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  z-index: 4;
+}
+
+/* Estilos del Div que contiene el Aviso de Espera */
+#img-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  /* background-image: url("./img/bgVid.jpg"); */
+  background-color:black;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   z-index: 3;
 }
 
@@ -56,6 +75,12 @@ body {
     width: 50vh;
     height: auto;
   }
+
+  /* Tamaño Escalable de la IMG */
+  #img-overlay .inner-img {
+    width: 50vh;
+    height: auto;
+  }
 }
 @media (max-aspect-ratio: 1/1) {
 
@@ -68,6 +93,11 @@ body {
   /* Tamaño Escalable del Video */
   #video-overlay .inner-vid {
     width: 80vw;
+    height: auto;
+  }
+
+  #img-overlay .inner-img {
+    width: 50vh;
     height: auto;
   }
 }
@@ -129,6 +159,14 @@ body {
   /* justify-content:center; */
   /* align-self: center; */
 }
+
+#intro-img{
+  /* padding-left: 55px; */
+  width: 100%;
+  /* justify-content:center; */
+  /* align-self: center; */
+}
+
 
 @keyframes move {
   0%, 100% { top: 0% }

@@ -19,45 +19,81 @@
       <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
       <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.3/dist/mindar-image-aframe.prod.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.3/dist/mindar-image.aframe.js"></script>
-
       <!-- JS para AR -->
       
         <!-- JS para Pop-Up -->
           <script>
+          
+            let arSystem;
+            
+            document.addEventListener("DOMContentLoaded", function() {
+              
+              var popupImg = document.getElementById("img-overlay");
+              
+              const sceneEl = document.querySelector('a-scene');
+              sceneEl.addEventListener('loaded', function () {
+                arSystem = sceneEl.systems["mindar-image-system"];
+              });
 
-          document.addEventListener("DOMContentLoaded", function() {
-            var popupVideo = document.getElementById("video-overlay");
-            var popupVideoContent = document.querySelector(".popupVideo-content");
-            var closeBtn = document.getElementById("close-btn");
-    
-            // Agrega un controlador de eventos para cerrar el pop-up al hacer clic en el botón de cerrar
-            closeBtn.addEventListener("click", function() {
-              popupVideo.style.display = "none";
-            });
-    
-            // Agrega un controlador de eventos para cerrar el pop-up al hacer clic fuera de la imagen
-            window.addEventListener("click", function(event) {
-              if (event.target === popupVideo) {
+              sceneEl.addEventListener("arReady", (event) => {
+                console.log("MindAR is ready");
+                popupImg.style.display = "none";
+              });
+
+              // Variables del pop-up
+              var popupVideo = document.getElementById("video-overlay");
+              var popupVideoContent = document.querySelector("popupVideo-content");
+              var closeBtn = document.getElementById("close-btn");
+              var videoPlayer = document.getElementById("intro-video");
+
+              // Agrega un controlador de eventos para cerrar el pop-up al hacer clic en el botón de cerrar
+              closeBtn.addEventListener("click", function() {
+                videoPlayer.pause();
                 popupVideo.style.display = "none";
+                arSystem.start();
+              });
+      
+              // Agrega un controlador de eventos para cerrar el pop-up al hacer clic fuera de la imagen
+              window.addEventListener("click", function(event) {
+                if (event.target === popupVideo) {
+                  videoPlayer.pause();
+                  popupVideo.style.display = "none";
+                  arSystem.start();
+                }
+              });
+      
+              // Evita que los clics dentro del contenido del popupVideo cierren el popupVideo
+              // var popupVideoContent = document.getElementById('popupVideoContent');
+              if (popupVideoContent) {
+                  popupVideoContent.addEventListener('click', function(event) {
+                      event.stopPropagation();
+                  });
               }
             });
-    
-            // Evita que los clics dentro del contenido del popupVideo cierren el popupVideo
-            popupVideoContent.addEventListener("click", function(event) {
-              event.stopPropagation();
-            });
-          });
-    
-          function showExampleContainer() {
-            // Oculta el video
-            const autoCloseVideo = document.getElementById("video-overlay");
-            autoCloseVideo.style.display = "none";
-          }
+      
+            // Oculta el video al terminar de reproducir
+            function showExampleContainer() {
+
+              // Variables del autocerrado
+              const autoPauseVideoPlayer = document.getElementById("intro-video");
+              const autoCloseVideoPopUp = document.getElementById("video-overlay");
+              const autoClosePlayerVideo = document.getElementById("contenedor-Vid");
+              
+              autoPauseVideoPlayer.pause();
+              autoCloseVideoPopUp.style.display="none";
+              arSystem.start();
+              
+              // setTimeout(()=>{
+                // },3000);
+                
+            }
+            
+            
+            
     
           </script>
         <!-- Fin Pop-Up -->
-        
+
         <!-- JS para Botones -->
           <script>
     
@@ -197,9 +233,7 @@
                   }
                 });
     
-                setTimeout(() => {
-                  done();
-                }, 500);
+                
                 
                 y=0.6;
               }
@@ -280,18 +314,29 @@
         
         <div id="video-overlay">
           
-          
-          <div class="inner-vid">
+          <div id="contenedor-Vid" class="inner-vid">
             
             <button id="close-btn" class="close-btn">&times;</button>
             <video id="intro-video" autoplay muted playsinline onended="showExampleContainer()">
+
               <source src="./vid/PromoBuchanans.mp4" type="video/mp4">
               Tu navegador no admite la reproducción de videos.
+            
             </video>
           
+          </div>
+
         </div>
-  
-      </div>
+        
+        <div id="img-overlay">
+          
+          <div class="inner-img">
+
+            <img id="intro-img" src="./img/ImgPreviewTarget.jpeg" alt="">
+          
+          </div>
+
+        </div>
   
       <div class="example-container">
         
@@ -309,7 +354,8 @@
   
   
         <a-scene
-        mindar-image="imageTargetSrc: ./assets/BuchanansMateriales/ART.mind;
+        mindar-image="autoStart: false;
+        imageTargetSrc: ./assets/BuchanansMateriales/ART.mind;
         showStats: false;
         uiScanning: #example-scanning-overlay;
         filterMinCF: 0.0001; 
