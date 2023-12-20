@@ -15,553 +15,262 @@
       <link rel="shortcut icon" href="assets/images/favicon.ico" />
       <link rel="apple-touch-icon" href="assets/images/favicon.ico" />
 
-      
+      <!-- Librerías -->
       <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
       <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.3/dist/mindar-image-aframe.prod.js"></script>
+      
       <!-- JS para AR -->
-      
-        <!-- JS para Pop-Up -->
-          <script>
-          
-            let arSystem;
-            
-            document.addEventListener("DOMContentLoaded", function() {
-              
-              var popupImg = document.getElementById("img-overlay");
-              
-              const sceneEl = document.querySelector('a-scene');
-              sceneEl.addEventListener('loaded', function () {
-                arSystem = sceneEl.systems["mindar-image-system"];
-              });
+      <script src="./assets/js/popups.js"></script>
+      <script src="./assets/js/mindarscripting.js"></script>
 
-              sceneEl.addEventListener("arReady", (event) => {
-                console.log("MindAR is ready");
-                popupImg.style.display = "none";
-              });
-
-              // Variables del pop-up
-              var popupVideo = document.getElementById("video-overlay");
-              var popupVideoContent = document.querySelector("popupVideo-content");
-              var closeBtn = document.getElementById("close-btn");
-              var videoPlayer = document.getElementById("intro-video");
-
-              // Agrega un controlador de eventos para cerrar el pop-up al hacer clic en el botón de cerrar
-              closeBtn.addEventListener("click", function() {
-                videoPlayer.pause();
-                popupVideo.style.display = "none";
-                arSystem.start();
-              });
-      
-              // Agrega un controlador de eventos para cerrar el pop-up al hacer clic fuera de la imagen
-              window.addEventListener("click", function(event) {
-                if (event.target === popupVideo) {
-                  videoPlayer.pause();
-                  popupVideo.style.display = "none";
-                  arSystem.start();
-                }
-              });
-      
-              // Evita que los clics dentro del contenido del popupVideo cierren el popupVideo
-              // var popupVideoContent = document.getElementById('popupVideoContent');
-              if (popupVideoContent) {
-                  popupVideoContent.addEventListener('click', function(event) {
-                      event.stopPropagation();
-                  });
-              }
-            });
-      
-            // Oculta el video al terminar de reproducir
-            function showExampleContainer() {
-
-              // Variables del autocerrado
-              const autoPauseVideoPlayer = document.getElementById("intro-video");
-              const autoCloseVideoPopUp = document.getElementById("video-overlay");
-              const autoClosePlayerVideo = document.getElementById("contenedor-Vid");
-              
-              autoPauseVideoPlayer.pause();
-              autoCloseVideoPopUp.style.display="none";
-              arSystem.start();
-              
-              // setTimeout(()=>{
-                // },3000);
-                
-            }
-            
-            
-            
-    
-          </script>
-        <!-- Fin Pop-Up -->
-
-        <!-- JS para Botones -->
-          <script>
-    
-          // Función de creación, aparición y eventos de los botones
-          const showInfo = () => {
-    
-            // Variables de Botones
-            let y = 0;
-            // const webButton = document.querySelector("#web-button");
-            // const facebookButton = document.querySelector("#facebook-button");
-            const instagramButton = document.querySelector("#instagram-button");
-            const youtubeButton = document.querySelector("#youtube-button");
-            const registroButton = document.querySelector("#registro-button");
-            const redirYouButton = document.querySelector("#IMG-Preview-button");
-    
-            // const text = document.querySelector("#text");
-    
-            // Tiempo en el que aprecerán los botones luego de que el primero aparezca
-            instagramButton.setAttribute("visible", true);
-            setTimeout(() => {
-              youtubeButton.setAttribute("visible", true);
-            }, 300);
-            setTimeout(() => {
-              registroButton.setAttribute("visible", true);
-            }, 600);
-            // setTimeout(() => {
-            //   webButton.setAttribute("visible", true);
-            // }, 900);
-            // setTimeout(() => {
-            //   facebookButton.setAttribute("visible", true);
-            // }, 1200);
-    
-            // Eventos de los botones (Cuando son clickeados)
-            let currentTab = '';
-            instagramButton.addEventListener('click', function (evt) {
-              console.log("Instagram");
-              window.open("https://www.instagram.com/buchanans_col/");
-              currentTab = 'instagram';
-            });
-            youtubeButton.addEventListener('click', function (evt) {
-              console.log("Youtube");
-              window.open("https://www.youtube.com/@BuchanansColombia");
-              currentTab = 'youtube';
-            });
-            registroButton.addEventListener('click', function (evt) {
-              console.log("Registro");
-              window.open("https://co.buchananswhisky.com/productos/buchanan-s-two-souls/");
-              currentTab = 'registro';
-            });
-            redirYouButton.addEventListener('click', function (evt) {
-              console.log("Registro");
-              window.open("https://www.youtube.com/watch?v=ljXvW9GJKd0");
-              currentTab = 'registro';
-            });
-            // webButton.addEventListener('click', function (evt) {
-            //   console.log("Web");
-            //   window.open("https://co.buchananswhisky.com");
-            //   currentTab = 'web';
-            // });
-            // facebookButton.addEventListener('click', function (evt) {
-            //   console.log("Facebook");
-            //   window.open("https://www.facebook.com/BuchanansColombia/?mibextid=LQQJ4d");
-            //   currentTab = 'facebook';
-            // });
-            // text.addEventListener('click', function (evt) {
-            //   if (currentTab === 'web') {
-            //     console.log("Web2");
-            //     window.location.href="";
-            //   }
-            // });
-    
-          }
-    
-          // Función de creación
-          const showPromo = (done) => {
-            const promo = document.querySelector("#promo-panel");
-            const promo2 = document.querySelector("#promo-panel2");
-            const promo3 = document.querySelector("#promo-panel3");
-    
-            const promoLeftButton = document.querySelector("#promo-left-button");
-            const promoRightButton = document.querySelector("#promo-right-button");
-    
-            // const paintandquestPreviewButton = document.querySelector("#IMG-Preview-button");
-            const paintandquestPreviewButton2 = document.querySelector("#IMG-Preview-button2");
-            const paintandquestPreviewButton3 = document.querySelector("#IMG-Preview-button3");
-    
-    
-            let y = 0;
-            let currentItem = 0;
-    
-            // Visibilidad del panel
-            promo.setAttribute("visible", true);
-            promo2.setAttribute("visible", true);
-            promo3.setAttribute("visible", true);
-    
-    
-            // Mustra la Promo con las imagenes en la parte superior
-            const showPromoItem = (item) => {
-              for (let i = 0; i <= 2; i++) {
-                document.querySelector("#promo-item" + i).setAttribute("visible", i === item);
-              }
-            }
-    
-            // Hace visible los botones
-            const id = setInterval(() => {
-              y += 0.008;
-              if (y >= 0.6) {
-
-    
-                paintandquestPreviewButton2.addEventListener('click', () => {
-                  paintandquestPreviewButton2.setAttribute("visible", false);
-                  const testVideo = document.createElement( "video" );
-                  const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
-                  if (canplayWebm == "") {
-                    document.querySelector("#paintandquest-video-link2").setAttribute("visible", true);
-                    document.querySelector("#paintandquest-video-link2").setAttribute("src", "#videoPromoMp4");
-                    document.querySelector("#videoPromoMp4").play();
-                  } else {
-                    document.querySelector("#paintandquest-video-link2").setAttribute("visible", true);
-                    document.querySelector("#paintandquest-video-link2").setAttribute("src", "#videoPromoWebM");
-                    document.querySelector("#videoPromoWebM").play();
-                  }
-                });
-    
-                paintandquestPreviewButton3.addEventListener('click', () => {
-                  paintandquestPreviewButton3.setAttribute("visible", false);
-                  const testVideo = document.createElement( "video" );
-                  const canplayWebm = testVideo.canPlayType( 'video/webm; codecs="vp8, vorbis"' );
-                  if (canplayWebm == "") {
-                    document.querySelector("#paintandquest-video-link3").setAttribute("visible", true);
-                    document.querySelector("#paintandquest-video-link3").setAttribute("src", "#videoPromoMp4");
-                    document.querySelector("#videoPromoMp4").play();
-                  } else {
-                    document.querySelector("#paintandquest-video-link3").setAttribute("visible", true);
-                    document.querySelector("#paintandquest-video-link3").setAttribute("src", "#videoPromoWebM");
-                    document.querySelector("#videoPromoWebM").play();
-                  }
-                });
-    
-                
-                
-                y=0.6;
-              }
-              
-              
-              promo.setAttribute("position", "0 " + y + " -0.01");
-              promo2.setAttribute("position", ".915 " + y + " .255");
-              promo3.setAttribute("position", "-.915 " + y + " .255");
-            }, 10);
-          }
-    
-          var botella = document.querySelector('#avatar');
-          //Eventos al registrar el Target
-          AFRAME.registerComponent('mytarget', {
-    
-            //Se inicia esta función cuando el Target es encontrado
-            init: function () {
-    
-              // Hace la lectura de la señal de que el Target fue encontrado
-              this.el.addEventListener('targetFound', event => {
-    
-                // Avisa en la consola que el Target fue encontrado
-                console.log("Target Found");
-
-
-                
-                
-                // Se pone un TimeOut de 500 milisegundos para que empiece con la siguiente función
-                setTimeout(() => {
-                 
-                  document.querySelector("#avatar").setAttribute("animation-mixer", "loop:once; clampWhenFinished: true;");
-                  
-                  setTimeout(() => {
-                    
-                    showPromo();
-                    showInfo();
-                    
-                  },10000);
-  
-                }, 3000);
-    
-              });
-    
-              // Hace la lectura de la señal de que el Target se perdió
-              this.el.addEventListener('targetLost', event => {
-    
-                //Avisa en la consola que el Target se perdió
-                console.log("Target Lost");
-    
-              });
-    
-              const videoVolMp4 = document.querySelector("#videoPromoMp4");
-              const videoVolWebM = document.querySelector("#videoPromoWebM");
-              videoVolMp4.volume = 0.2;
-              videoVolWebM.volume = 0.2;
-            }
-    
-    
-          });
-    
-          </script>
-        <!-- Fin Botones -->
-
-      <!-- Fin JS para AR -->
+      <!-- Css -->
+      <link rel="stylesheet" href="./nothingstyles.css">
+      <link href="assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet">
         
-        <!-- Css -->
-        <link rel="stylesheet" href="./nothingstyles.css">
-        <link href="assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet">
-        
-        <!-- Main Css -->
-        <link href="assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
-        <link rel="stylesheet" href="assets/css/icons.css" />
-        <link rel="stylesheet" href="assets/css/tailwind.css" />
+      <!-- Main Css -->
+      <link href="assets/libs/@iconscout/unicons/css/line.css" type="text/css" rel="stylesheet" />
+      <link rel="stylesheet" href="assets/css/icons.css" />
+      <link rel="stylesheet" href="assets/css/tailwind.css" />
         
       </head>
     
       <body>
         
-        <div id="video-overlay">
-          
-          <div id="contenedor-Vid" class="inner-vid">
+        <!-- Pop-Up Video -->
+          <div id="video-overlay">
             
-            <button id="close-btn" class="close-btn">&times;</button>
-            <video id="intro-video" autoplay muted playsinline onended="showExampleContainer()">
+            <div id="contenedor-Vid" class="inner-vid">
+              
+              <button id="close-btn" class="close-btn">&times;</button>
+              <video id="intro-video" autoplay muted playsinline onended="showExampleContainer()">
 
-              <source src="./vid/PromoBuchanans.mp4" type="video/mp4">
-              Tu navegador no admite la reproducción de videos.
+                <source src="./vid/PromoBuchanans.mp4" type="video/mp4">
+                Tu navegador no admite la reproducción de videos.
+              
+              </video>
             
-            </video>
-          
+            </div>
+
           </div>
-
-        </div>
+        <!-- Fin Pop-Up Video -->
         
-        <div id="img-overlay">
-          
-          <div class="inner-img">
+        <!-- Pop-Up Aviso -->
+          <div id="img-overlay" style="display: none;">
+            
+            <div class="inner-img">
 
-            <img id="intro-img" src="./img/Texto.png" alt="">
-          
+              <img id="intro-img" src="./img/Texto.png" alt="">
+            
+            </div>
+
           </div>
-
-        </div>
-  
-      <div class="example-container">
+        <!-- Fin Pop-Up Aviso -->
         
-        <!-- ScanLine: aparece cuando el target no está siendo enfocado-->
-        <div id="example-scanning-overlay" class="hidden">
-  
-          <div class="inner">
-  
-            <div class="scanline"></div>
-            <img src="./img/ArtToRender.png"/>
-            
+        <!-- Container AR -->
+        <div class="example-container">
+          
+          <!-- ScanLine: aparece cuando el target no está siendo enfocado-->
+          <div id="example-scanning-overlay" class="hidden">
+    
+            <div class="inner">
+    
+              <div class="scanline"></div>
+              <img src="./img/ArtToRender.png"/>
+              
+            </div>
+    
           </div>
-  
+          <!-- Fin ScanLine -->
+    
+          <a-scene
+          mindar-image="autoStart: false;
+          imageTargetSrc: ./assets/BuchanansMateriales/ART.mind;
+          showStats: false;
+          uiScanning: #example-scanning-overlay;
+          filterMinCF: 0.0001; 
+          filterBeta: 0.001;"
+          embedded 
+          renderer="colorManagement: true; physicallyCorrectLights: true; logarithmicDepthBuffer: true; precision: high;"
+          vr-mode-ui="enabled: false"
+          device-orientation-permission-ui="enabled: false"
+          stats = "false"
+          >
+    
+          
+    
+            
+            <!-- Biblioteca de Assets dentro del proyecto que se usan dentro del AR -->
+            <a-assets>
+    
+              <!-- Icono Website -->
+              <img id="icon-web" src="./img/sitio-web.png" />
+    
+              <!-- Icono Instagram -->
+              <img id="icon-instagram" src="./img/Instagram.png" />
+    
+              <!--  Icono Facebook -->
+              <img id="icon-facebook" src="./img/Facebook.png" />
+    
+              <!--  Icono Youtube-->
+              <img id="icon-youtube" src="./img/Yotube.png" />
+    
+              <!-- Icono Registro -->
+              <img id="icon-registro" src="./img/Registro.png" />
+    
+    
+              <!-- Botones Izq y Der para cambiar imagenes en la Promo -->
+              <img id="icon-left" src="./img/Izq.png" />
+              <img id="icon-right" src="./img/Der.png" />
+    
+              <!-- Imagen inicial antes del video -->
+              <img id="IMG-Preview" src="./img/IMGPanel.png" />
+              <img id="IMG-Preview3" src="./img/PreviewVid.jpg" />
+              <img id="IMG-Preview2" src="./img/PromoIMG2.jpg" />
+    
+              <!-- Video -->
+              <video id="videoPromoMp4" autoplay="false" loop="true" src="./vid/PromoBuchanans.mp4"></video>
+              <video id="videoPromoWebM" autoplay="false" loop="true" src="./vid/PromoBuchanans.webm"></video>
+    
+              <!-- Imagenes siguientes al video -->
+              <img id="IMG2" src="./img/PromoIMG2.jpg" />
+              <img id="IMG3" src="./img/PromoImg3.jpg" />
+    
+              <!-- Modelado 3D -->
+              <a-asset-item id="avatarModel" src="./assets/BuchanansMateriales/BotellaUltraLightV2.glb"></a-asset-item>
+              
+              <!-- <a-asset-item id="avatarModel" src="./assets/BuchanansMateriales/Prueba iluminacion.glb"></a-asset-item> -->
+            </a-assets>
+            <!-- Fin Bliblioteca Assets -->
+    
+    
+            <!-- AR Camera Config -->
+            <a-camera
+            position="0 0 0"
+            look-controls="enabled: false" 
+            cursor="fuse: false; rayOrigin: mouse;" 
+            raycaster="far: 10000; objects: .clickable">
+            </a-camera>
+            <!-- Fin AR Camera Config -->
+    
+    
+            <!-- Target con sus objetos internos -->
+            <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
+    
+                
+                <a-entity position="0 -.03 .2">
+                <!-- Panel con imagenes + video -->
+                  <a-entity visible=false id="promo-panel"  position="0 0 0">
+    
+                  <!-- Texto en la parte superior -->
+                  <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
+    
+                  <!-- Video + Preview Image del video -->
+                  <a-entity id="promo-item0">
+                    <!-- <a-video id="paintandquest-video-link" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video> -->
+                    <a-image id="IMG-Preview-button" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="-.001 0 0" height="1.5" width="1">
+                    </a-image>
+                  </a-entity>
+    
+                  <!-- Posición de flechas cambia IMGs -->
+                  <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
+                  <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
+                  </a-entity>
+    
+                  <a-entity visible=false id="promo-panel2" position=".915 .6 .255" rotation="0 -33 0">
+    
+                  <!-- Texto en la parte superior -->
+                  <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
+    
+                  <!-- Video + Preview Image del video -->
+                  <a-entity id="promo-item0">
+                    <a-video id="paintandquest-video-link2" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
+                    <a-image id="IMG-Preview-button2" class="clickable" src="#IMG-Preview2" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                    </a-image>
+                  </a-entity>
+    
+                  <!-- Imagen 2 -->
+                  <a-entity id="promo-item1" visible=false>
+                    <a-image class="clickable" src="#IMG2" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                    </a-image>
+                  </a-entity>
+    
+                  <!-- Imagen 3 -->
+                  <a-entity id="promo-item2" visible=false>
+                    <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                    </a-image>
+                  </a-entity>
+    
+                  <!-- Posición de flechas cambia IMGs -->
+                  <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
+                  <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
+                  </a-entity>
+    
+                  <a-entity visible=false id="promo-panel3" position="-.915 .6 .255" rotation="0 33 0">
+    
+                  <!-- Texto en la parte superior -->
+                  <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
+    
+                  <!-- Video + Preview Image del video -->
+                  <a-entity id="promo-item0">
+                    <a-video id="paintandquest-video-link3" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
+                    <a-image id="IMG-Preview-button3" class="clickable" src="#IMG-Preview3" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                    </a-image>
+                  </a-entity>
+    
+                  <!-- Imagen 2 -->
+                  <a-entity id="promo-item1" visible=false>
+                    <a-image class="clickable" src="#IMG2" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                    </a-image>
+                  </a-entity>
+    
+                  <!-- Imagen 3 -->
+                  <a-entity id="promo-item2" visible=false>
+                    <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
+                    </a-image>
+                  </a-entity>
+    
+                  <!-- Posición de flechas cambia IMGs -->
+                  <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
+                  <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
+                  </a-entity>
+                  
+                  <!-- Posición Instagram Icon -->
+                  <a-image visible=false id="instagram-button" class="clickable" src="#icon-instagram" position="-0.42 -.2 .5" height="0.15" width="0.15"
+                  animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+                  </a-image>
+                  
+                  <!-- Posición Youtube Icon -->
+                  <a-image visible=false id="youtube-button" class="clickable" src="#icon-youtube" position="0.42 -.2 .5" height="0.15" width="0.15"
+                  animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+                  </a-image>
+    
+                  <!-- Posición Registro Icon -->
+                  <a-image visible=false id="registro-button" class="clickable" src="#icon-registro" position="0 -.6 .5" height="0.15" width="0.5"
+                  animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+                  </a-image>
+    
+                  <!-- Posición Objeto 3D -->
+              
+                  <a-entity
+                  id="avatar"
+                  gltf-model="#avatarModel"
+                  rotation="90 0 0"
+                  scale=".7 .7 .7"
+                  position="0 -0.2 .2"
+                  >
+                  </a-entity>
+
+                </a-entity>
+    
+            </a-entity>       
+    
+          </a-scene>
+    
+    
+    
         </div>
-  
-  
-        <a-scene
-        mindar-image="autoStart: false;
-        imageTargetSrc: ./assets/BuchanansMateriales/ART.mind;
-        showStats: false;
-        uiScanning: #example-scanning-overlay;
-        filterMinCF: 0.0001; 
-        filterBeta: 0.001;"
-        embedded 
-        renderer="colorManagement: true; physicallyCorrectLights: true; logarithmicDepthBuffer: true; precision: high;"
-        vr-mode-ui="enabled: false"
-        device-orientation-permission-ui="enabled: false"
-        stats = "false"
-        >
-  
-        
-  
-          
-
-          <a-assets>
-            <!-- Imagen que se encuentra en el plano (se puede quitar si no se necesita) -->
-            <!-- <img id="card" src="./img/qrcode-generado.png" /> -->
-  
-            <!-- Icono Website -->
-            <img id="icon-web" src="./img/sitio-web.png" />
-  
-            <!-- Icono Instagram -->
-            <img id="icon-instagram" src="./img/Instagram.png" />
-  
-            <!--  Icono Facebook -->
-            <img id="icon-facebook" src="./img/Facebook.png" />
-  
-            <!--  Icono Youtube-->
-            <img id="icon-youtube" src="./img/Yotube.png" />
-  
-            <!-- Icono Registro -->
-            <img id="icon-registro" src="./img/Registro.png" />
-  
-  
-            <!-- Botones Izq y Der para cambiar imagenes en la Promo -->
-            <img id="icon-left" src="./img/Izq.png" />
-            <img id="icon-right" src="./img/Der.png" />
-  
-            <!-- Imagen inicial antes del video -->
-            <img id="IMG-Preview" src="./img/IMGPanel.png" />
-            <img id="IMG-Preview3" src="./img/PreviewVid.jpg" />
-            <img id="IMG-Preview2" src="./img/PromoIMG2.jpg" />
-  
-            <!-- Video -->
-            <video id="videoPromoMp4" autoplay="false" loop="true" src="./vid/PromoBuchanans.mp4"></video>
-            <video id="videoPromoWebM" autoplay="false" loop="true" src="./vid/PromoBuchanans.webm"></video>
-  
-            <!-- Imagenes siguientes al video -->
-            <img id="IMG2" src="./img/PromoIMG2.jpg" />
-            <img id="IMG3" src="./img/PromoImg3.jpg" />
-  
-            <!-- Modelado 3D -->
-            <a-asset-item id="avatarModel" src="./assets/BuchanansMateriales/BotellaUltraLightV2.glb"></a-asset-item>
-            
-            <!-- <a-asset-item id="avatarModel" src="./assets/BuchanansMateriales/Prueba iluminacion.glb"></a-asset-item> -->
-          </a-assets>
-  
-  
-  
-          
-          <a-camera
-          position="0 0 0"
-          
-          look-controls="enabled: false" 
-          cursor="fuse: false; rayOrigin: mouse;" 
-          raycaster="far: 10000; objects: .clickable">
-          </a-camera>
-  
-  
-  
-          <!-- Target con sus objetos internos -->
-          <a-entity id="mytarget" mytarget mindar-image-target="targetIndex: 0">
-  
-              <!-- Plano con imagen detrás (Se puede quitar) -->
-              <!-- <a-plane src="#card" position="0 0 -.5" height="2" width="1.5" rotation="0 0 0"></a-plane> -->
-  
-              <a-entity position="0 -.03 .2">
-              <!-- Panel con imagenes + video -->
-                <a-entity visible=false id="promo-panel"  position="0 0 0">
-  
-                <!-- Texto en la parte superior -->
-                <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
-  
-                <!-- Video + Preview Image del video -->
-                <a-entity id="promo-item0">
-                  <!-- <a-video id="paintandquest-video-link" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video> -->
-                  <a-image id="IMG-Preview-button" class="clickable" src="#IMG-Preview" alpha-test="0.5" position="-.001 0 0" height="1.5" width="1">
-                  </a-image>
-                </a-entity>
-  
-                <!-- Posición de flechas cambia IMGs -->
-                <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
-                <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
-                </a-entity>
-  
-                <a-entity visible=false id="promo-panel2" position=".915 .6 .255" rotation="0 -33 0">
-  
-                <!-- Texto en la parte superior -->
-                <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
-  
-                <!-- Video + Preview Image del video -->
-                <a-entity id="promo-item0">
-                  <a-video id="paintandquest-video-link2" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
-                  <a-image id="IMG-Preview-button2" class="clickable" src="#IMG-Preview2" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                  </a-image>
-                </a-entity>
-  
-                <!-- Imagen 2 -->
-                <a-entity id="promo-item1" visible=false>
-                  <a-image class="clickable" src="#IMG2" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                  </a-image>
-                </a-entity>
-  
-                <!-- Imagen 3 -->
-                <a-entity id="promo-item2" visible=false>
-                  <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                  </a-image>
-                </a-entity>
-  
-                <!-- Posición de flechas cambia IMGs -->
-                <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
-                <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
-                </a-entity>
-  
-                <a-entity visible=false id="promo-panel3" position="-.915 .6 .255" rotation="0 33 0">
-  
-                <!-- Texto en la parte superior -->
-                <!-- <a-text value="Promo" color="black" align="center" width="1" position="0 .5 0"></a-text> -->
-  
-                <!-- Video + Preview Image del video -->
-                <a-entity id="promo-item0">
-                  <a-video id="paintandquest-video-link3" webkit-playsinline playsinline visible=false width="1" height="2" position="0 0 0" ></a-video>
-                  <a-image id="IMG-Preview-button3" class="clickable" src="#IMG-Preview3" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                  </a-image>
-                </a-entity>
-  
-                <!-- Imagen 2 -->
-                <a-entity id="promo-item1" visible=false>
-                  <a-image class="clickable" src="#IMG2" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                  </a-image>
-                </a-entity>
-  
-                <!-- Imagen 3 -->
-                <a-entity id="promo-item2" visible=false>
-                  <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                  </a-image>
-                </a-entity>
-  
-                <!-- Posición de flechas cambia IMGs -->
-                <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
-                <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
-                </a-entity>
-  
-                <!-- Posición Web Icon -->
-                <!-- <a-image visible=false id="web-button" class="clickable" src="#icon-web" alpha-test="0.5" position="-0.42 0 .5" height="0.15" width="0.15"
-                animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
-                </a-image> -->
-                
-                <!-- Posición Facebook Icon -->
-                <!-- <a-image visible=false id="facebook-button" class="clickable" src="#icon-facebook"  position=".42 0 .5" height="0.15" width="0.15"
-                animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
-                </a-image> -->
-                
-                <!-- Posición Instagram Icon -->
-                <a-image visible=false id="instagram-button" class="clickable" src="#icon-instagram" position="-0.42 -.2 .5" height="0.15" width="0.15"
-                animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
-                </a-image>
-                
-  
-                <!-- Posición Youtube Icon -->
-                <a-image visible=false id="youtube-button" class="clickable" src="#icon-youtube" position="0.42 -.2 .5" height="0.15" width="0.15"
-                animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
-                </a-image>
-  
-                <!-- Posición Registro Icon -->
-                <a-image visible=false id="registro-button" class="clickable" src="#icon-registro" position="0 -.6 .5" height="0.15" width="0.5"
-                animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
-                </a-image>
-  
-  
-                <!-- Posición Objeto 3D -->
-            
-                <a-entity
-                id="avatar"
-                gltf-model="#avatarModel"
-                rotation="90 0 0"
-                scale=".7 .7 .7"
-                position="0 -0.2 .2"
-                >
-                </a-entity>
-
-                
-                
-                <a-entity light="type: ambient; color: #fff"></a-entity>
-
-              </a-entity>
-  
-          </a-entity>
-          
-  
-        </a-scene>
-  
-  
-  
-      </div>
+        <!-- Fin Container AR -->
 
         <!-- JAVASCRIPTS -->
         <script src="assets/libs/tiny-slider/min/tiny-slider.js"></script>
