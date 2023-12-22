@@ -84,16 +84,28 @@
           <!-- Fin ScanLine -->
     
           <a-scene
-          mindar-image="autoStart: false;
+          
+          mindar-image="
+          autoStart: false;
           imageTargetSrc: ./assets/BuchanansMateriales/ART.mind;
           showStats: false;
           uiScanning: #example-scanning-overlay;
           filterMinCF: 0.0001; 
           filterBeta: 0.001;"
-          embedded 
-          renderer="colorManagement: true; physicallyCorrectLights: true; logarithmicDepthBuffer: true; precision: high;"
+          
+          embedded
+
+          renderer="
+          colorManagement: true;
+          physicallyCorrectLights: true;
+          logarithmicDepthBuffer: true;
+          precision: medium;
+          antialias: false;"
+
           vr-mode-ui="enabled: false"
+          
           device-orientation-permission-ui="enabled: false"
+          
           stats = "false"
           >
     
