@@ -145,7 +145,7 @@ const showInfo = () => {
             showPromo();
             showInfo();
             
-          },10000);
+          },3000);
 
         }, 3000);
 
