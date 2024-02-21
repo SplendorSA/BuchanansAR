@@ -3,7 +3,11 @@ let arSystem;
 document.addEventListener("DOMContentLoaded", function() {
               
     var popupImg = document.getElementById("img-overlay");
-              
+
+    var popupForm = document.getElementById("form-overlay");
+
+    var closeBtnForm = document.getElementById("close-btn-form");
+
     const sceneEl = document.querySelector('a-scene');
     sceneEl.addEventListener('loaded', function () {
         arSystem = sceneEl.systems["mindar-image-system"];
@@ -17,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Variables del pop-up
     var popupVideo = document.getElementById("video-overlay");
     var popupVideoContent = document.querySelector("popupVideo-content");
-    var closeBtn = document.getElementById("close-btn");
+    var closeBtn = document.getElementById("close-btn");    
     var videoPlayer = document.getElementById("intro-video");
 
     // Agrega un controlador de eventos para cerrar el pop-up al hacer clic en el botón de cerrar
@@ -27,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
         popupImg.style.display= "";
         arSystem.start();
     });
+
+    closeBtnForm.addEventListener("click", function() {
+        popupForm.style.display = "none";
+    });
       
     // Agrega un controlador de eventos para cerrar el pop-up al hacer clic fuera de la imagen
     window.addEventListener("click", function(event) {
@@ -35,6 +43,12 @@ document.addEventListener("DOMContentLoaded", function() {
             popupVideo.style.display = "none";
             popupImg.style.display= "";
             arSystem.start();
+        }
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target === popupForm) {
+            popupForm.style.display = "none";
         }
     });
       

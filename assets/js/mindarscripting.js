@@ -9,6 +9,8 @@ const showInfo = () => {
     const registroButton = document.querySelector("#registro-button");
     const redirYouButton = document.querySelector("#IMG-Preview-button");
 
+    const formGoogle = document.querySelector("#form-overlay");
+
     // const text = document.querySelector("#text");
 
     // Tiempo en el que aprecerán los botones luego de que el primero aparezca
@@ -34,7 +36,7 @@ const showInfo = () => {
     });
     registroButton.addEventListener('click', function (evt) {
       console.log("Registro");
-      window.open("https://co.buchananswhisky.com/productos/buchanan-s-two-souls/");
+      formGoogle.style.display = "";
       currentTab = 'registro';
     });
     redirYouButton.addEventListener('click', function (evt) {

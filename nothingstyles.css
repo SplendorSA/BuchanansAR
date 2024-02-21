@@ -61,6 +61,23 @@ body {
   z-index: 3;
 }
 
+#form-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  /* background-image: url("./img/bgVid.jpg"); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  z-index: 4;
+}
 
 @media (min-aspect-ratio: 1/1) {
 
@@ -72,6 +89,11 @@ body {
 
   /* Tamaño Escalable del Video */
   #video-overlay .inner-vid {
+    width: 50vh;
+    height: auto;
+  }
+
+  #form-overlay .inner-form {
     width: 50vh;
     height: auto;
   }
@@ -93,6 +115,11 @@ body {
   /* Tamaño Escalable del Video */
   #video-overlay .inner-vid {
     width: 80vw;
+    height: auto;
+  }
+
+  #form-overlay .inner-form {
+    width: 80vh;
     height: auto;
   }
 
@@ -153,6 +180,20 @@ body {
   background-color: transparent;
 }
 
+/* Estilos para cerrar el pop-up Form */
+
+.close-btn-form {
+  border: none;
+  color: white ;
+  position: absolute;
+
+  top: 20px ;
+  right: 10px ;
+  cursor: pointer ;
+  font-size: 80px ;
+  background-color: transparent;
+}
+
 #intro-video{
   padding-left: 20px;
   width: 90%;
@@ -166,6 +207,79 @@ body {
   /* justify-content:center; */
   /* align-self: center; */
 }
+
+#intro-gif{
+  /* padding-left: 55px; */
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  /* justify-content:center; */
+  /* align-self: center; */
+}
+
+#intro-form{
+  /* padding-left: 55px; */
+  width: 75%;
+  padding: 30px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:#46b8b0;
+
+  /* justify-content:center; */
+  /* align-self: center; */
+}
+
+#intro-form h4{
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: white;
+}
+
+#intro-form .form-group input{
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#intro-form textarea{
+  width: 100%;
+  padding: 10px;
+}
+
+#submit{
+  border: none;
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px;
+  width: 50%;
+  text-align: center; 
+  margin-top: 10px;
+  border-radius: 5px;
+  align-self:center;
+}
+
+#submit:hover{
+  background-color: white;
+  color: black;
+}
+
+#textCond{
+  color: white;
+  padding-left: 5px;
+  font-weight: bold;
+}
+
+#checking{
+  margin-top:10px;
+  width: 15px;
+  height: 15px;
+}
+
 
 
 @keyframes move {
