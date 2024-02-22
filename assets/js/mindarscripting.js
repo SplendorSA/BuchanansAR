@@ -4,8 +4,8 @@ const showInfo = () => {
     // Variables de Botones
     let y = 0;
     
-    const instagramButton = document.querySelector("#instagram-button");
-    const youtubeButton = document.querySelector("#youtube-button");
+    const jrigButton = document.querySelector("#jrig-button");
+    const buchaigButton = document.querySelector("#buchaig-button");
     const registroButton = document.querySelector("#registro-button");
     const redirYouButton = document.querySelector("#IMG-Preview-button");
 
@@ -14,9 +14,9 @@ const showInfo = () => {
     // const text = document.querySelector("#text");
 
     // Tiempo en el que aprecerán los botones luego de que el primero aparezca
-    instagramButton.setAttribute("visible", true);
+    jrigButton.setAttribute("visible", true);
     setTimeout(() => {
-      youtubeButton.setAttribute("visible", true);
+      buchaigButton.setAttribute("visible", true);
     }, 300);
     setTimeout(() => {
       registroButton.setAttribute("visible", true);
@@ -24,15 +24,15 @@ const showInfo = () => {
 
     // Eventos de los botones (Cuando son clickeados)
     let currentTab = '';
-    instagramButton.addEventListener('click', function (evt) {
-      console.log("Instagram");
-      window.open("https://www.instagram.com/buchanans_col/");
-      currentTab = 'instagram';
+    jrigButton.addEventListener('click', function (evt) {
+      console.log("JRIG");
+      window.open("https://www.instagram.com/jrlicoresjunior/");
+      currentTab = 'JRIG';
     });
-    youtubeButton.addEventListener('click', function (evt) {
-      console.log("Youtube");
-      window.open("https://www.youtube.com/@BuchanansColombia");
-      currentTab = 'youtube';
+    buchaigButton.addEventListener('click', function (evt) {
+      console.log("Buchanan's IG");
+      window.open("https://www.instagram.com/buchanans_col/");
+      currentTab = 'buchaig';
     });
     registroButton.addEventListener('click', function (evt) {
       console.log("Registro");
@@ -40,9 +40,9 @@ const showInfo = () => {
       currentTab = 'registro';
     });
     redirYouButton.addEventListener('click', function (evt) {
-      console.log("Registro");
+      console.log("Youtube");
       window.open("https://www.youtube.com/watch?v=ljXvW9GJKd0");
-      currentTab = 'registro';
+      currentTab = 'youtube';
     });
 
   }
@@ -121,7 +121,7 @@ const showInfo = () => {
       promo2.setAttribute("position", ".915 " + y + " .255");
       promo3.setAttribute("position", "-.915 " + y + " .255");
 
-    }, 10);
+    }, 30);
   }
 
   var botella = document.querySelector('#avatar');
