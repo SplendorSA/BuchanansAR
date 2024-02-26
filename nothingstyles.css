@@ -1,5 +1,8 @@
 body {
   margin: 0;
+  background: rgb(0, 0, 0);background-image: url("./img/bgVid.jpg");
+
+  background-size: 100%;
 }
 
 /* Estilos de Div que contiene Escena AR */
@@ -22,6 +25,10 @@ body {
   bottom: 0;
   background: transparent;
   z-index: 2;
+}
+
+#BGB{
+  
 }
 
 /* Estilos del Div que contiene el Video Pop-up */
