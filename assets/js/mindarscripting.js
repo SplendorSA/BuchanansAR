@@ -6,8 +6,7 @@ const showInfo = () => {
     
     const jrigButton = document.querySelector("#jrig-button");
     const buchaigButton = document.querySelector("#buchaig-button");
-    const registroButton = document.querySelector("#registro-button");
-    const redirYouButton = document.querySelector("#IMG-Preview-button");
+    const regisForm = document.querySelector("#IMG-Preview-button");
 
     const formGoogle = document.querySelector("#form-overlay");
 
@@ -18,9 +17,6 @@ const showInfo = () => {
     setTimeout(() => {
       buchaigButton.setAttribute("visible", true);
     }, 300);
-    setTimeout(() => {
-      registroButton.setAttribute("visible", true);
-    }, 600);
 
     // Eventos de los botones (Cuando son clickeados)
     let currentTab = '';
@@ -34,15 +30,10 @@ const showInfo = () => {
       window.open("https://www.instagram.com/buchanans_col/");
       currentTab = 'buchaig';
     });
-    registroButton.addEventListener('click', function (evt) {
+    regisForm.addEventListener('click', function (evt) {
       console.log("Registro");
       formGoogle.style.display = "";
       currentTab = 'registro';
-    });
-    redirYouButton.addEventListener('click', function (evt) {
-      console.log("Youtube");
-      window.open("https://www.youtube.com/watch?v=ljXvW9GJKd0");
-      currentTab = 'youtube';
     });
 
   }

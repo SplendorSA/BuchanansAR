@@ -138,7 +138,7 @@
             <div class="inner">
     
               <div class="scanline"></div>
-              <img src="./img/ArtToRender.png"/>
+              <img src="./img/ArtToRender.webp"/>
               
             </div>
     
@@ -177,36 +177,25 @@
             <!-- Biblioteca de Assets dentro del proyecto que se usan dentro del AR -->
             <a-assets>
     
-              <!-- Icono Website -->
-              <img id="icon-web" src="./img/sitio-web.png" />
-    
               <!-- Icono Instagram -->
               <img id="icon-JR" src="./img/JRIG.png" />
 
               <img id="icon-buchaig" src="./img/BuchaIG.png" />
     
-              <!--  Icono Facebook -->
-              <img id="icon-facebook" src="./img/Facebook.png" />
-    
-              <!-- Icono Registro -->
-              <img id="icon-registro" src="./img/Registro.png" />
-    
-              <!-- Botones Izq y Der para cambiar imagenes en la Promo -->
-              <img id="icon-left" src="./img/Izq.png" />
-              <img id="icon-right" src="./img/Der.png" />
+              
+
     
               <!-- Imagen inicial antes del video -->
-              <img id="IMG-Preview" src="./img/IMGPanel.png" />
-              <img id="IMG-Preview3" src="./img/PreviewVid.jpg" />
-              <img id="IMG-Preview2" src="./img/PromoIMG2.jpg" />
+              <img id="IMG-Preview" src="./img/IMGPanel.webp" />
+              <img id="IMG-Preview3" src="./img/PreviewVid.webp" />
+              <img id="IMG-Preview2" src="./img/PromoIMG2.webp" />
     
               <!-- Video -->
               <video id="videoPromoMp4" autoplay="false" loop="true" src="./vid/PromoBuchanans.mp4"></video>
               <video id="videoPromoWebM" autoplay="false" loop="true" src="./vid/PromoBuchanans.webm"></video>
     
               <!-- Imagenes siguientes al video -->
-              <img id="IMG2" src="./img/PromoIMG2.jpg" />
-              <img id="IMG3" src="./img/PromoImg3.jpg" />
+              <img id="IMG2" src="./img/PromoIMG2.webp" />
     
               <!-- Modelado 3D -->
               <a-asset-item id="avatarModel" src="./assets/BuchanansMateriales/BotellaUltraLight.glb"></a-asset-item>
@@ -244,9 +233,6 @@
                     </a-image>
                   </a-entity>
     
-                  <!-- Posición de flechas cambia IMGs -->
-                  <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
-                  <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
                   </a-entity>
     
                   <a-entity visible=false id="promo-panel2" position=".915 .6 .255" rotation="0 -33 0">
@@ -267,15 +253,9 @@
                     </a-image>
                   </a-entity>
     
-                  <!-- Imagen 3 -->
-                  <a-entity id="promo-item2" visible=false>
-                    <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                    </a-image>
-                  </a-entity>
+                  
     
                   <!-- Posición de flechas cambia IMGs -->
-                  <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
-                  <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
                   </a-entity>
     
                   <a-entity visible=false id="promo-panel3" position="-.915 .6 .255" rotation="0 33 0">
@@ -296,31 +276,21 @@
                     </a-image>
                   </a-entity>
     
-                  <!-- Imagen 3 -->
-                  <a-entity id="promo-item2" visible=false>
-                    <a-image class="clickable" src="#IMG3" alpha-test="0.5" position="0 0 0" height="1" width="1">
-                    </a-image>
-                  </a-entity>
+                  
     
-                  <!-- Posición de flechas cambia IMGs -->
-                  <a-image visible=false id="promo-left-button" class="clickable" src="#icon-left" position="-0.7 0 0" height="0.15" width="0.15"></a-image>
-                  <a-image visible=false id="promo-right-button" class="clickable" src="#icon-right" position="0.7 0 0" height="0.15" width="0.15"></a-image>
                   </a-entity>
                   
                   <!-- Posición Instagram Icon -->
-                  <a-image visible=false id="jrig-button" class="clickable" src="#icon-JR" position="-0.42 -.2 .5" height="0.15" width="0.15"
+                  <a-image visible=false id="jrig-button" class="clickable" src="#icon-JR" position="-0.3 -.2 .5" height="0.15" width="0.15"
                   animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
                   </a-image>
                   
                   <!-- Posición Youtube Icon -->
-                  <a-image visible=false id="buchaig-button" class="clickable" src="#icon-buchaig" position="0.42 -.2 .5" height="0.15" width="0.15"
+                  <a-image visible=false id="buchaig-button" class="clickable" src="#icon-buchaig" position="0.3 -.2 .5" height="0.15" width="0.15"
                   animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
                   </a-image>
     
-                  <!-- Posición Registro Icon -->
-                  <a-image visible=false id="registro-button" class="clickable" src="#icon-registro" position="0 -.6 .5" height="0.15" width="0.7"
-                  animation="property: scale; to: 1.2 1.2 1.2; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
-                  </a-image>
+                  
     
                   <!-- Posición Objeto 3D -->
               
