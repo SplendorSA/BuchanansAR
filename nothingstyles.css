@@ -76,7 +76,7 @@ body {
   background-position: center;
   background-size: cover;
   text-align: center;
-  z-index: 4;
+  z-index: 5;
 }
 
 @media (min-aspect-ratio: 1/1) {
@@ -94,8 +94,8 @@ body {
   }
 
   #form-overlay .inner-form {
-    width: 50vh;
-    height: auto;
+    width: 80vh;
+    height: 70%;
   }
 
   /* Tamaño Escalable de la IMG */
@@ -120,7 +120,8 @@ body {
 
   #form-overlay .inner-form {
     width: 80vh;
-    height: auto;
+    height: 70%;
+    /* padding-bottom: 90vh; */
   }
 
   #img-overlay .inner-img {
